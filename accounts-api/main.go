@@ -5,15 +5,14 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gorilla/mux"
 	"github.com/ricardomaricato/payment-routine/accounts-api/config"
-	"github.com/ricardomaricato/payment-routine/accounts-api/database"
+	"github.com/ricardomaricato/payment-routine/accounts-api/router"
 )
 
 func main() {
 	config.Load()
-	database.Connect()
-	fmt.Println("Iniciando a aplicação")
-	r := mux.NewRouter()
+
+	r := router.GenerateRouter()
+	fmt.Printf("Listening at the door: %d\n", config.Port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", config.Port), r))
 }
