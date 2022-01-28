@@ -3,13 +3,14 @@ package database
 import (
 	"log"
 
+	"github.com/ricardomaricato/payment-routine/accounts-api/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
-func ConnectToDatabase() (*gorm.DB, error) {
-	dsn := "root:root@tcp(localhost:3306)/?charset=utf8&parseTime=True&loc=Local"
-	DB, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+// Connect opens the database connection and returns it
+func Connect() (*gorm.DB, error) {
+	DB, err := gorm.Open(mysql.Open(config.DataBaseConectionString), &gorm.Config{})
 	if err != nil {
 		log.Panic("Error to connect to database")
 		return nil, err
