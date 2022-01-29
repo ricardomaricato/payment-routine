@@ -9,11 +9,10 @@ import (
 )
 
 // Connect opens the database connection and returns it
-func Connect() (*gorm.DB, error) {
+func Connect() *gorm.DB {
 	DB, err := gorm.Open(mysql.Open(config.DataBaseConectionString), &gorm.Config{})
 	if err != nil {
-		log.Panic("Error to connect to database")
-		return nil, err
+		log.Panic("[Connect] Error to connect to database")
 	}
-	return DB, nil
+	return DB
 }

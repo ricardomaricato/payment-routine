@@ -30,8 +30,9 @@ func Load() {
 		Port = 9000
 	}
 
-	DataBaseConectionString = fmt.Sprintf("%s:%s@tcp(localhost:3306)/?charset=utf8&parseTime=True&loc=Local",
+	DataBaseConectionString = fmt.Sprintf("%s:%s@tcp(localhost:3306)/%s?charset=utf8&parseTime=True&loc=Local",
 		os.Getenv("DB_USERNAME"),
 		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_NAME"),
 	)
 }
