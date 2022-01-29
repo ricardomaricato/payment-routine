@@ -7,6 +7,7 @@ import (
 
 	"github.com/labstack/gommon/log"
 	"github.com/ricardomaricato/payment-routine/accounts-api/models"
+	"github.com/ricardomaricato/payment-routine/accounts-api/responses"
 	"github.com/ricardomaricato/payment-routine/accounts-api/services"
 )
 
@@ -32,15 +33,16 @@ func (h *AccountHandler) CreateAccountHandler(w http.ResponseWriter, r *http.Req
 	var account models.Account
 	if err = json.Unmarshal(requestBody, &account); err != nil {
 		log.Info("[CreateAccountHandler json.Unmarsahal] Error unmarshalling account")
+		responses.Err(w, http.StatusBadGateway, err)
 		return
 	}
 
-	accountID, err := h.accountService.CreateAccountService(r.Context(), account)
+	account.Account_ID, err = h.accountService.CreateAccountService(r.Context(), account)
 	if err != nil {
 		log.Info("[CreateAccountHandler CreateAccountService] Error creating account")
+		responses.Err(w, http.StatusInternalServerError, err)
 		return
 	}
 
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(accountID)
+	responses.JSON(w, http.StatusCreated, account)
 }
