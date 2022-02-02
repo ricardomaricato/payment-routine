@@ -46,7 +46,7 @@ func Test_CreateAccountHandler_ShouldReturnsStatusInternalServerError_WhenFailsT
 	service := mock.NewMockAccountService(ctrl)
 	accountHandler := NewAccountHandler(service)
 
-	service.EXPECT().CreateAccountService(context.Background(), gomock.Any()).Return(errors.New("Error"))
+	service.EXPECT().CreateAccountService(context.Background(), gomock.Any()).Return(uint64(0), errors.New("Error"))
 
 	req, _ := http.NewRequest("POST", "/v1/accounts", bytes.NewBufferString(`
 		{

@@ -21,7 +21,7 @@ func Test_CreateAccountService_ShouldReturnsAccountID_WhenSuccessful(t *testing.
 		AvailableWithDrawalLimit: 1000.0,
 	}
 
-	mockDao.EXPECT().CreateAccountRepository(context.Background(), account).Return(nil, uint64(0)).AnyTimes()
+	mockDao.EXPECT().CreateAccountRepository(context.Background(), account).Return(uint64(0), nil).AnyTimes()
 
 	account.Account_ID, _ = service.CreateAccountService(context.Background(), account)
 	assert.NotNil(t, account)

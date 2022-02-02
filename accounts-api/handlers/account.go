@@ -11,23 +11,23 @@ import (
 	"github.com/ricardomaricato/payment-routine/accounts-api/services"
 )
 
-// AccountHandler interface
-// type AccountHandler interface {
-// 	CreateAccountHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) error
-// }
+// // AccountHandler interface
+type AccountHandler interface {
+	CreateAccountHandler(w http.ResponseWriter, r *http.Request)
+}
 
 // AccountHandler implements AccountHandler
-type AccountHandler struct {
+type AccountHandlerImpl struct {
 	accountService services.AccountService
 }
 
 // NewAccountHandler returns constructor
-func NewAccountHandler(accountService services.AccountService) *AccountHandler {
-	return &AccountHandler{accountService: accountService}
+func NewAccountHandler(accountService services.AccountService) AccountHandler {
+	return &AccountHandlerImpl{accountService: accountService}
 }
 
 // CreateAccountHandler creates a new account
-func (h *AccountHandler) CreateAccountHandler(w http.ResponseWriter, r *http.Request) {
+func (h *AccountHandlerImpl) CreateAccountHandler(w http.ResponseWriter, r *http.Request) {
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Info("[CreateAccountHandler ReadAll] Error reading body data")

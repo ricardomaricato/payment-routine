@@ -25,7 +25,7 @@ func NewAccountRepository(DB *gorm.DB) *AccountRepositoryImpl {
 
 // CreateAccountRepository creates a new account in database
 func (r *AccountRepositoryImpl) CreateAccountRepository(ctx context.Context, account models.Account) (uint64, error) {
-	if result := r.DB.Create(&account).Last(&account); result.Error != nil {
+	if result := r.DB.WithContext(ctx).Create(&account).Last(&account); result.Error != nil {
 		log.Errorf("[CreateAccountRepository] Failed to create account on DB. Error: %s", result.Error)
 		return 0, result.Error
 	}

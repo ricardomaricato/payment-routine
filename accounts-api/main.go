@@ -17,11 +17,9 @@ func main() {
 	config.Load()
 	db := database.Connect()
 
-	accountHandler := handlers.NewAccountHandler(
-		services.NewAccountService(
-			repositories.NewAccountRepository(db),
-		),
-	)
+	accountRepositoy := repositories.NewAccountRepository(db)
+	accountService := services.NewAccountService(accountRepositoy)
+	accountHandler := handlers.NewAccountHandler(accountService)
 
 	r := mux.NewRouter()
 	r.HandleFunc("/v1/accounts", accountHandler.CreateAccountHandler).Methods("POST")
