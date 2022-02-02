@@ -1,6 +1,6 @@
 # Rotina de pagamento
 
-A Pismo oferece aos seus clientes uma plataforma para o processamento de pagamentos. Dentre as muitas das responsabilidades de uma plataforma de pagamento, uma das mais críticas é o controle dos lançamentos de débito e crédito e seus vencimentos nas faturas dos clientes. O desafio técnico a seguir explora o seguinte cenário.
+A Empresa oferece aos seus clientes uma plataforma para o processamento de pagamentos. Dentre as muitas das responsabilidades de uma plataforma de pagamento, uma das mais críticas é o controle dos lançamentos de débito e crédito e seus vencimentos nas faturas dos clientes. O desafio técnico a seguir explora o seguinte cenário.
 
 Cada portador de cartão (cliente) possui uma conta e a cada operação realizada pelo cliente um lançamento é criado e associado a sua respectiva conta. Cada lançamento possui um tipo (compra a vista, compra parcelada, saque, etc.), um valor, uma data de criação e uma data de vencimento. Segue abaixo uma estrutura de dados sugerida:
 
